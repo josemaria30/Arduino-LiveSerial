@@ -1,0 +1,25 @@
+const int pinEntrada = A0;  // Pin analógico para la entrada de la señal
+float voltajeReferencia = 5.0;  // Voltaje de referencia del Arduino (5V para la mayoría de los modelos)
+int lecturaADC;
+float tension;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Leer el valor analógico
+  lecturaADC = analogRead(pinEntrada);
+
+  // Convertir la lectura a voltaje
+  tension = (lecturaADC / 1023.0) * voltajeReferencia;
+
+  // Imprimir el resultado en el Monitor Serie
+  Serial.print("Lectura ADC: ");
+  Serial.print(lecturaADC);
+  Serial.print(", Tensión: ");
+  Serial.print(tension, 3);  // Imprimir tres decimales
+  Serial.println(" V");
+
+  delay(1000);  // Esperar 1 segundo antes de realizar la siguiente lectura
+}
